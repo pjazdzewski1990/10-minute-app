@@ -1,3 +1,4 @@
+import model.EmployeeRole
 import skinny._
 import skinny.controller._
 import _root_.controller._
@@ -22,7 +23,18 @@ class ScalatraBootstrap extends SkinnyLifeCycle {
     //skinnyWorkerService.everyFixedSeconds(sampleWorker, 3)
 
     Controllers.mount(ctx)
+    createFixtures()
   }
 
+  def createFixtures() = {
+    if(EmployeeRole.countAllModels() == 0) {
+      EmployeeRole.createWithAttributes(
+        'name -> "Scala Hakker",
+        'technology -> "Scala, Akka, Play, JVM",
+        'responsibilities -> "Create awesome things!",
+        'minExperience -> 1
+      )
+    }
+  }
 }
 
