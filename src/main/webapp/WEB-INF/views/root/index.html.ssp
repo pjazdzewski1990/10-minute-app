@@ -4,3 +4,7 @@
 Your first Skinny app works!
 </p>
 
+<%@val s: skinny.Skinny %>
+<p>
+    <a href="${s.url(Controllers.pollResults.newUrl)}">Fill the survey</a>
+</p>
