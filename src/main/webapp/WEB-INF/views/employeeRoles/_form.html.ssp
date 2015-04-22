@@ -1,0 +1,89 @@
+<%@val s: skinny.Skinny %>
+<%@val keyAndErrorMessages: skinny.KeyAndErrorMessages %>
+
+<%-- Be aware of package imports.
+ 1. src/main/scala/templates/ScalatePackage.scala
+ 2. scalateTemplateConfig in project/Build.scala
+--%>
+
+<div class="form-group">
+  <label class="control-label" for="name">
+    ${s.i18n.getOrKey("employeeRole.name")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("name")) "has-error" else ""}">
+      <div class="col-xs-12">
+        <input type="text" name="name" class="form-control" value="${s.params.name}" />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("name"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("name"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label" for="technology">
+    ${s.i18n.getOrKey("employeeRole.technology")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("technology")) "has-error" else ""}">
+      <div class="col-xs-12">
+        <input type="text" name="technology" class="form-control" value="${s.params.technology}" />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("technology"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("technology"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label" for="responsibilities">
+    ${s.i18n.getOrKey("employeeRole.responsibilities")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("responsibilities")) "has-error" else ""}">
+      <div class="col-xs-12">
+        <input type="text" name="responsibilities" class="form-control" value="${s.params.responsibilities}" />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("responsibilities"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("responsibilities"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label" for="min_experience">
+    ${s.i18n.getOrKey("employeeRole.minExperience")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("min_experience")) "has-error" else ""}">
+      <div class="col-xs-12">
+        <input type="text" name="min_experience" class="form-control" value="${s.params.min_experience}" />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("min_experience"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("min_experience"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-actions">
+  ${unescape(s.csrfHiddenInputTag)}
+  <input type="submit" class="btn btn-primary" value="${s.i18n.getOrKey("submit")}">
+  <a class="btn btn-default" href="${s.url(Controllers.employeeRoles.indexUrl)}">${s.i18n.getOrKey("cancel")}</a>
+</div>

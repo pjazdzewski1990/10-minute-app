@@ -1,0 +1,46 @@
+<%@val item: model.EmployeeRole %>
+<%@val s: skinny.Skinny %>
+
+<%-- Be aware of package imports.
+ 1. src/main/scala/templates/ScalatePackage.scala
+ 2. scalateTemplateConfig in project/Build.scala
+--%>
+
+<h3>${s.i18n.getOrKey("employeeRole.detail")}</h3>
+<hr/>
+#for (notice <- s.flash.notice)
+  <p class="alert alert-info">${notice}</p>
+#end
+<table class="table table-bordered">
+<tbody>
+  <tr>
+    <th>${s.i18n.getOrKey("employeeRole.id")}</th>
+    <td>${item.id}</td>
+  </tr>
+  <tr>
+    <th>${s.i18n.getOrKey("employeeRole.name")}</th>
+    <td>${item.name}</td>
+  </tr>
+  <tr>
+    <th>${s.i18n.getOrKey("employeeRole.technology")}</th>
+    <td>${item.technology}</td>
+  </tr>
+  <tr>
+    <th>${s.i18n.getOrKey("employeeRole.responsibilities")}</th>
+    <td>${item.responsibilities}</td>
+  </tr>
+  <tr>
+    <th>${s.i18n.getOrKey("employeeRole.minExperience")}</th>
+    <td>${item.minExperience}</td>
+  </tr>
+
+</tbody>
+</table>
+
+<hr/>
+<div class="form-actions">
+  <a class="btn btn-default" href="${s.url(Controllers.employeeRoles.indexUrl)}">${s.i18n.getOrKey("backToList")}</a>
+  <a href="${s.url(Controllers.employeeRoles.editUrl, "id" -> item.id)}" class="btn btn-info">${s.i18n.getOrKey("edit")}</a>
+  <a data-method="delete" data-confirm="${s.i18n.getOrKey("employeeRole.delete.confirm")}"
+    href="${s.url(Controllers.employeeRoles.destroyUrl, "id" -> item.id)}" rel="nofollow" class="btn btn-danger">${s.i18n.getOrKey("delete")}</a>
+</div>
