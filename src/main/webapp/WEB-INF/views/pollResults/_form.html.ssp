@@ -63,25 +63,32 @@
     #end
   </div>
 </div>
+
+<%@val roles: Seq[model.EmployeeRole] = model.EmployeeRole.findAll() %>
 <div class="form-group">
-  <label class="control-label" for="role">
-    ${s.i18n.getOrKey("pollResult.role")}
-  </label>
-  <div class="controls row">
-    <div class="${if(keyAndErrorMessages.hasErrors("role")) "has-error" else ""}">
-      <div class="col-xs-12">
-        <input type="text" name="role" class="form-control" value="${s.params.role}" />
-      </div>
-    </div>
-    #if (keyAndErrorMessages.hasErrors("role"))
-      <div class="col-xs-12 has-error">
-        #for (error <- keyAndErrorMessages.getErrors("role"))
-          <label class="control-label">${error}</label>
+<label class="control-label" for="role">
+  ${s.i18n.getOrKey("pollResult.role")}
+</label>
+<div class="controls row">
+  <div class="${if(keyAndErrorMessages.hasErrors("role")) "has-error" else ""}">
+    <div class="col-xs-12">
+      <select name="role">
+        #for (r <- roles)
+          <option value="${r.id}">${r.name}</option>
         #end
-      </div>
-    #end
+      </select>
+    </div>
   </div>
+  #if (keyAndErrorMessages.hasErrors("role"))
+    <div class="col-xs-12 has-error">
+    #for (error <- keyAndErrorMessages.getErrors("role"))
+      <label class="control-label">${error}</label>
+    #end
+    </div>
+  #end
 </div>
+</div>
+
 <div class="form-actions">
   ${unescape(s.csrfHiddenInputTag)}
   <input type="submit" class="btn btn-primary" value="${s.i18n.getOrKey("submit")}">

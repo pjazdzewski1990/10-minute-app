@@ -20,7 +20,7 @@ class PollResultsController extends SkinnyResource with ApplicationController {
   override def createParams = Params(params)
   override def createForm = validation(createParams,
     paramKey("name") is required & maxLength(512),
-    paramKey("email") is required & maxLength(512),
+    paramKey("email") is required & maxLength(512) & email,
     paramKey("description") is required & maxLength(512),
     paramKey("role") is required & numeric & longValue
   )
